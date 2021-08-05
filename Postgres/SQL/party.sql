@@ -1,9 +1,11 @@
+--t_placeテーブルの作るクイリ
 CREATE TABLE t_place(
 	place_id bigserial PRIMARY KEY, 
 	name text not null, 
 	address text not null
 );
 
+--ｔ_partyテーブルの作るクイリ
 CREATE TABLE t_party (
 	party_id bigserial PRIMARY KEY, 
 	title text not null, 
@@ -14,6 +16,7 @@ CREATE TABLE t_party (
 	price_woman integer not null
 );
 
+--t_memberテーブルの作るクイリ
 CREATE TABLE t_member(
 	member_id bigserial PRIMARY KEY,
 	member_cd text not null,
@@ -25,13 +28,14 @@ CREATE TABLE t_member(
 	birthday_ts timestamptz not null
 );
 
+--t_party_memberテーブルの作るクイリ
 CREATE TABLE t_party_member(
 	party_member_id bigserial PRIMARY KEY, 
 	party_id bigint not null references t_party(party_id),
 	member_id bigint not null references t_member(member_id)
 ); 
 
-
+--t_placeテーブルにデータを入れる
 INSERT into t_place values
 	(1,	'新宿パーティー会場', '東京都新宿区西新宿1-2-3'),
 	(2, '恵比寿パーティー会場',	'東京都渋谷区恵比寿5-5'),
@@ -41,6 +45,7 @@ INSERT into t_place values
 	(6, '伊豆パーティー会場', '神奈川県伊豆市9-123'),
 	(7,	'横浜パーティー会場', '神奈川県横浜市6-456');
 
+--t_partyテーブルにデータを入れる
 INSERT into t_party values
 
 	(1, '男女20代限定パーティー', '2018-05-18 14:00:00', '2018-05-18 15:30:00',	3, 3000,2000),
@@ -48,6 +53,8 @@ INSERT into t_party values
 	(3, '1年以内に結婚したい30代限定パーティー', '2018-05-20 10:00:00', '2018/05/20 12:00:00',	2,4000, 3000),
 	(4, 'BBQ婚活パーティー', '2018-05-26 11:00:00', '2018-05-26 14:00:00',	4, 5000, 4000);
 
+	
+--t_memberテーブルにデータを入れる
 INSERT into t_member values
 
 	(1, 'M88035', '00101', '山田', '太郎', 'やまだ', 'たろう',	'1982-02-02 0:00:00'),
@@ -58,7 +65,7 @@ INSERT into t_member values
 	(6, 'F55543', '00102',	'遠藤',	'裕美',	'えんどう', 'ゆみ', '1992-03-30 0:00:00'),
 	(7, 'M36945', '00101',	'前田', '三郎',	'まえだ',	'さぶろう', '1985-05-02 0:00:00');
 
-
+--t_party_memberテーブルにデータを入れる
 INSERT into t_party_member values
 
 	(1, 3, 1),
