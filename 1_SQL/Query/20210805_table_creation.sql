@@ -11,7 +11,7 @@ CREATE TABLE t_party (
 	title text not null, 
 	start_ts timestamptz not null, 
 	end_ts timestamptz not null, 
-	place_id bigint not null references t_place(place_id), 
+	place_id bigint not null ,
 	price_man integer not null, 
 	price_woman integer not null
 );
@@ -31,6 +31,6 @@ CREATE TABLE t_member(
 --t_party_memberテーブルの作るクイリ
 CREATE TABLE t_party_member(
 	party_member_id bigserial PRIMARY KEY, 
-	party_id bigint not null references t_party(party_id),
-	member_id bigint not null references t_member(member_id)
+	party_id bigint not null ,
+	member_id bigint not null
 ); 
