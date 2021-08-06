@@ -10,4 +10,5 @@
 会員IDが2,3,4					
 */
 
-select member_cd, gender_kbn, family_kj, cast(birthday_ts as date) from t_member where member_id in (2, 3, 4);
+select member_cd, gender_kbn, family_kj, 
+    cast(birthday_ts as date) from t_member where member_id in (2, 3, 4);
