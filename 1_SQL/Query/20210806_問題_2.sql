@@ -11,4 +11,10 @@
 女性					
 */
 
-select member_cd,concat(first_kj, first_kn) as 姓名, case when gender_kbn = '00101' then '男性' when gender_kbn = '00102' then '女性' else 'Other' end as 性別, date_part('year',age(birthday_ts)) as 年齢 from t_member where gender_kbn = '00102' and date_part('year',age(birthday_ts))>=30;
+select member_cd,concat(family_kn, first_kn) as 姓名, 
+	case when gender_kbn = '00101' then '男性' 
+		 when gender_kbn = '00102' then '女性' else 'Other' 
+	end as 性別, 
+	date_part('year',age(birthday_ts)) as 年齢 from t_member 
+	where gender_kbn = '00102' and date_part('year',age(birthday_ts))>=30
+;
