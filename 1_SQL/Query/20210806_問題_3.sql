@@ -22,12 +22,9 @@
 確認者備考：					
 この課題はサブクエリあり・なし両パターン作る					
 */
-select distinct t_party.party_id as パーティーID,title as パーティー名,to_char(start_ts, 'YYYY/MM/DD  HH24:MI') as 開催日時 
-from t_party_member 
- INNER JOIN t_party on(t_party_member.party_id = t_party.party_id)
- INNER JOIN t_member on(t_party_member.member_id = t_member.member_id)
- where gender_kbn = '00101' 
- and 
- t_party_member.party_id not in 
- 	(select party_id from t_party_member INNER JOIN t_member on (t_party_member.member_id = t_member.member_id)
-		where gender_kbn = '00102');
+SELECT t_party.party_id AS パーティーID, t_party.title AS パーティー名, to_char(start_ts, 'YYYY/MM/DD  HH24:MI') as 開催日時  FROM t_party
+INNER JOIN t_party_member on (t_party.party_id = t_party_member.party_id)
+INNER JOIN t_member on (t_party_member.member_id = t_member.member_id)
+GROUP BY t_party.party_id
+having SUM(case when t_member.gender_kbn = '00102' AND t_party.party_id = t_party_member.party_id then 1 else 0 end) = 0
+;
