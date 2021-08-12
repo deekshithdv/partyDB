@@ -6,7 +6,7 @@ puts DB.fetch("SELECT t_party.party_id AS パーティーID, t_party.title AS �
 	INNER JOIN t_party_member on (t_party.party_id = t_party_member.party_id)
 	INNER JOIN t_member on (t_party_member.member_id = t_member.member_id)
 	GROUP BY t_party.party_id
-	having SUM(case when t_member.gender_kbn = '00102' AND t_party.party_id = t_party_member.party_id then 1 else 0 end) = 0;").all
+	having SUM(case when t_member.gender_kbn = '00102' then 1 else 0 end) = 0;").all
 
 puts "\n方法 2"
 puts DB[:t_party].inner_join(:t_party_member, party_id: :party_id)

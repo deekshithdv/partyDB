@@ -22,7 +22,7 @@ CREATE or REPLACE function mondai_3() RETURNS TABLE (
 	INNER JOIN t_party_member on (t_party.party_id = t_party_member.party_id)
 	INNER JOIN t_member on (t_party_member.member_id = t_member.member_id)
 	GROUP BY t_party.party_id
-	having SUM(case when t_member.gender_kbn = '00102' AND t_party.party_id = t_party_member.party_id then 1 else 0 end) = 0
+	having SUM(case when t_member.gender_kbn = '00102' then 1 else 0 end) = 0
 	;
     END $$ 
 language plpgsql;		
